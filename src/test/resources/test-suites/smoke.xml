@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd" >
+<suite name = "Smoke" parallel="tests" thread-count="4">
+    <test name="QAPlayground - HomePage">
+        <classes>
+            <class name="com.vlutsenko.tests.HomePageTest"/>
+        </classes>
+    </test>
+    <test name="QAPlayground - DynamicTablePage - AntMan">
+        <parameter name="testDataPath"
+                   value="test-data/dynamictablepage/antman.json"/>
+        <classes>
+            <class name="com.vlutsenko.tests.DynamicTableTest"/>
+        </classes>
+    </test>
+    <test name="QAPlayground - VerifyYourAccount">
+        <classes>
+            <class name="com.vlutsenko.tests.VerifyYourAccountTest"/>
+        </classes>
+    </test>
+    <test name="QAPlayground - TagsInputBox">
+        <classes>
+            <class name="com.vlutsenko.tests.TagsInputBoxTest"/>
+        </classes>
+    </test>
+</suite>
