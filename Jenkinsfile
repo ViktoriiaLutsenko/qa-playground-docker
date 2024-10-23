@@ -6,12 +6,12 @@ pipeline{
                 bat "mvn clean package -DskipTests"
             }
         }
-        stage('Build Image'){
+        stage('Build Image') {
             steps {
-                bat "docker build -t=tempori/selenium" .
+                bat "docker build -t=tempori/selenium ."
             }
         }
-        stage('Push Image'){
+        stage('Push Image') {
             steps {
                 bat "docker push tempori/selenium"
             }
