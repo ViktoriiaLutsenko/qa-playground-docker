@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Build Image') {
             steps {
-                bat "docker build -t=tempori/selenium ."
+                bat "docker build -t=tempori/selenium:latest ."
             }
         }
         stage('Push Image') {
@@ -17,7 +17,9 @@ pipeline{
             }
             steps {
                 bat 'docker login -u %DOCKER_HUB_USR% -p %DOCKER_HUB_PSW%'
-                bat "docker push tempori/selenium"
+                bat "docker push tempori/selenium:latest"
+                bat "docker tag tempori/selenium:latest tempori/selenium:{env.BUILD_NUMBER}"
+                bat "docker push tempori/selenium:{env.BUILD_NUMBER}"
             }
         }
     }
