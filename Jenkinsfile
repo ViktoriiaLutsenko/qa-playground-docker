@@ -24,7 +24,9 @@ pipeline{
         }
 
         stage('Run tests'){
-            build job: 'SELENIUM_DOCKER_RUNNER', parameters: [string(name: 'BROWSER', value: 'chrome')]
+            steps{
+                build job: 'SELENIUM_DOCKER_RUNNER', parameters: [string(name: 'BROWSER', value: 'chrome')]
+            }
         }
     }
     post {
