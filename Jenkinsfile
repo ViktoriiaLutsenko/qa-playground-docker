@@ -3,12 +3,12 @@ pipeline{
     stages {
         stage('Build Jar') {
             steps {
-                bat "mvn clean package -DskipTests"
+                sh "mvn clean package -DskipTests"
             }
         }
         stage('Build Image') {
             steps {
-                bat "docker build -t=tempori/selenium:latest ."
+                sh "docker build -t=tempori/selenium:latest ."
             }
         }
         stage('Push Image') {
@@ -16,10 +16,10 @@ pipeline{
                 DOCKER_HUB = credentials("dockerhub_creds")
             }
             steps {
-                bat 'docker login -u %DOCKER_HUB_USR% -p %DOCKER_HUB_PSW%'
-                bat "docker push tempori/selenium:latest"
-                bat "docker tag tempori/selenium:latest tempori/selenium:${env.BUILD_NUMBER}"
-                bat "docker push tempori/selenium:${env.BUILD_NUMBER}"
+                sh 'docker login -u %DOCKER_HUB_USR% -p %DOCKER_HUB_PSW%'
+                sh "docker push tempori/selenium:latest"
+                sh "docker tag tempori/selenium:latest tempori/selenium:${env.BUILD_NUMBER}"
+                sh "docker push tempori/selenium:${env.BUILD_NUMBER}"
             }
         }
 
@@ -31,7 +31,7 @@ pipeline{
     }
     post {
         always {
-            bat "docker logout"
+            sh "docker logout"
         }
     }
 }
